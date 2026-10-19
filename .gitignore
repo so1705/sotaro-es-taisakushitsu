@@ -1,0 +1,6 @@
+# 利用者のデータ（更新を取り込んでも消えないように、Gitの管理から外す）
+経験DB/
+企業/
+.update_last_check
+.DS_Store
+internal/
