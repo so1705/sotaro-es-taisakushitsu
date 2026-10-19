@@ -11,6 +11,8 @@ model: opus
 - `knowledge/es-pro/01_設問の裏読み.md`
 - `knowledge/es-pro/02_業界別.md` の該当業界
 - `knowledge/es-pro/03_落ちるES.md`
+- `knowledge/es-pro/05_線の設計図.md`（設問ごとに、線のどの区間を見せるか）
+- `knowledge/es-pro/06_通過ES分析.md`（通過ES・内定者ESから分かった、強いESの要素）
 - その企業の `companies/<企業名>/research.md`（なければ企業分析を先に依頼する）
 - 本人の `経験DB/`
 
