@@ -4,3 +4,5 @@
 .update_last_check
 .DS_Store
 internal/
+# 深い調査（imozuru）の原文。再配布しないので、GitHubに上げない
+research/

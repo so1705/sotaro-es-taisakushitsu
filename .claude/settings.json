@@ -6,6 +6,37 @@
           { "type": "command", "command": "bash \"$CLAUDE_PROJECT_DIR/scripts/update-check.sh\"", "timeout": 30 }
         ]
       }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Read|Edit|Write|MultiEdit|Glob|Grep|NotebookEdit",
+        "hooks": [
+          { "type": "command", "command": "bash \"$CLAUDE_PROJECT_DIR/scripts/guard.sh\"", "timeout": 10 }
+        ]
+      }
     ]
+  },
+  "permissions": {
+    "deny": [
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Read(~/Desktop/**)",
+      "Read(~/Documents/**)",
+      "Read(~/Downloads/**)",
+      "Read(~/Pictures/**)",
+      "Bash(sudo *)",
+      "Bash(rm -rf /*)",
+      "Bash(rm -rf ~*)",
+      "Bash(rm -rf ..*)"
+    ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "filesystem": {
+      "denyRead": ["~/.ssh", "~/.aws", "~/Desktop", "~/Documents", "~/Downloads", "~/Pictures"]
+    },
+    "network": {
+      "allowedDomains": ["github.com", "*.github.com", "*.githubusercontent.com"]
+    }
   }
 }

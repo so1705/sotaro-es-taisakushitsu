@@ -18,6 +18,7 @@ description: |
 > - これは MaryCache/imozuru（MIT License、`LICENSE`）を、コミット ffa669e の時点で同梱したもの。
 > - 1つの問いで約15〜20万トークンを使い、何本も同時に回すと5時間の利用枠を使い切ることがある。**使う前に必ず本人に「imozuru で深く調べると使用量が大きくなるけど、調べていい？」と聞き、了承を得てから始める**。了承がなければ、ふつうのリサーチ（`researcher`）で進める。
 > - ES作成の中で使う時の流れは `.claude/commands/es.md` の「深く調べる（imozuru）」に従う。
+> - **保存先は、下の本文の `~/research/<話題>/` ではなく、ES対策室のフォルダの中の `research/<話題>/` にする**（ES対策室は、フォルダの外を触らない決まり。`research/` は GitHub に上がらない）。
 > - Python で SSL のエラーが出たら、`SSL_CERT_FILE=/etc/ssl/cert.pem` を付けて `python3 -I <このフォルダ>/scripts/fetch.py ...` を回す。PDF の本文には `pdftotext`（poppler）が要る。
 
 # imozuru
