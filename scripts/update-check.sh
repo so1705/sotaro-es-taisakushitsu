@@ -1,10 +1,10 @@
 #!/bin/bash
-# 起動時に呼ばれる。前回の確認から14日以上たっていたら、GitHubの更新を確認して取り込む。
+# 起動時に呼ばれる。前回の確認から3日以上たっていたら、GitHubの更新を確認して取り込む。
 cd "$(dirname "$0")/.." || exit 0
 stamp=.update_last_check
 now=$(date +%s)
 last=$(cat "$stamp" 2>/dev/null || echo 0)
-[ $((now - last)) -lt $((14 * 86400)) ] && exit 0
+[ $((now - last)) -lt $((3 * 86400)) ] && exit 0
 echo "$now" > "$stamp"
 
 git fetch --quiet --tags origin 2>/dev/null || exit 0

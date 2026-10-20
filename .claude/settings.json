@@ -3,7 +3,7 @@
     "SessionStart": [
       {
         "hooks": [
-          { "type": "command", "command": "bash \"$CLAUDE_PROJECT_DIR/scripts/update-check.sh\"", "timeout": 30 }
+          { "type": "command", "command": "bash \"$CLAUDE_PROJECT_DIR/scripts/update-check.sh\"", "timeout": 30, "onFailure": "continue" }
         ]
       }
     ],

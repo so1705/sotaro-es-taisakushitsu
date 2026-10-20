@@ -44,7 +44,7 @@ for label, path in parts:
     body.append(f"\n\n---\n# 【{label}】\n\n" + strip_front(path.read_text()))
 (out / "手順_作成と審査.md").write_text("".join(body))
 
-(out / "プロジェクトの指示.txt").write_text((root / "free/src/プロジェクトの指示.md").read_text())
+(out / "プロジェクトの指示.txt").write_text((root / "free/src/プロジェクトの指示.md").read_text().replace("{{VERSION}}", version))
 
 for p in sorted(out.iterdir()):
     print(f"{p.name}\t{len(p.read_text())}字")
