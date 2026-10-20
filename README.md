@@ -60,3 +60,6 @@ Q1の書き方メモ（任意）：
 
 ## 利用条件
 個人の就職活動のために、自由に使ってかまいません。内容の再配布・販売はご遠慮ください。
+
+## 同梱しているもの
+- `.claude/skills/imozuru/`：[MaryCache/imozuru](https://github.com/MaryCache/imozuru)（MIT License）。原文までたどって深く調べる道具。有料版で、本人が深い調査を頼んだ時だけ、了承を取ってから使います（使用量が大きいため）。このフォルダには、上の利用条件ではなく、同じフォルダの `LICENSE`（MIT License）が適用されます。PDFを読むには `pdftotext`（poppler）が必要です
