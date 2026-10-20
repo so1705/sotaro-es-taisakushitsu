@@ -22,7 +22,7 @@ def kfile(n):
     return next(k.glob(f"{n:02d}_*.md"))
 
 bundle("知識1_ESの考え方.md", "知識1：ESの考え方",
-       [(kfile(n).stem, kfile(n)) for n in (0, 1, 3, 4, 5)])
+       [(kfile(n).stem, kfile(n)) for n in (0, 1, 3, 4, 5, 13)])
 bundle("知識2_型と業界.md", "知識2：型と業界",
        [(kfile(n).stem, kfile(n)) for n in (2, 6, 8, 9, 10, 11)])
 bundle("知識3_文章の仕上げ.md", "知識3：文章の仕上げ",
