@@ -46,5 +46,22 @@ for label, path in parts:
 
 (out / "プロジェクトの指示.txt").write_text((root / "free/src/プロジェクトの指示.md").read_text().replace("{{VERSION}}", version))
 
-for p in sorted(out.iterdir()):
+# ChatGPT用（無料版の自分史インタビュー）：指示＋資料2つ
+gpt = root / "free/ChatGPT用"
+gpt.mkdir(parents=True, exist_ok=True)
+inst = (root / "interview/自分史インタビュアー_指示.md").read_text()
+(gpt / "指示.txt").write_text(inst.split("\n---\n", 1)[1].strip() + "\n")
+def section(text, start, end=None):
+    i = text.index(start)
+    j = text.index(end, i + len(start)) if end else len(text)
+    return text[i:j]
+k13 = kfile(13).read_text()
+parts1 = [("14_自分史インタビューの設計", strip_front(kfile(14).read_text())),
+          ("07_文体と盛り", strip_front(kfile(7).read_text())),
+          ("13の4章 聞き方の決まり", section(k13, "## 4. 補強の質問の作り方", "## 5."))]
+(gpt / "資料1_インタビューの設計.md").write_text(f"# 資料1：インタビューの設計（ES対策室 {version}）\n" + "".join(f"\n\n---\n# 【{l}】\n\n{b}" for l, b in parts1))
+parts2 = [(kfile(n).stem, strip_front(kfile(n).read_text())) for n in (11, 8, 5)]
+(gpt / "資料2_ESの型.md").write_text(f"# 資料2：ESの型（ES対策室 {version}）\n" + "".join(f"\n\n---\n# 【{l}】\n\n{b}" for l, b in parts2))
+
+for p in sorted(list(out.iterdir()) + list(gpt.iterdir())):
     print(f"{p.name}\t{len(p.read_text())}字")
