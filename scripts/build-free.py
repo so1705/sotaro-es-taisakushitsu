@@ -60,8 +60,10 @@ parts1 = [("14_自分史インタビューの設計", strip_front(kfile(14).read
           ("07_文体と盛り", strip_front(kfile(7).read_text())),
           ("13の4章 聞き方の決まり", section(k13, "## 4. 補強の質問の作り方", "## 5."))]
 (gpt / "資料1_インタビューの設計.md").write_text(f"# 資料1：インタビューの設計（ES対策室 {version}）\n" + "".join(f"\n\n---\n# 【{l}】\n\n{b}" for l, b in parts1))
-parts2 = [(kfile(n).stem, strip_front(kfile(n).read_text())) for n in (11, 8, 5)]
-(gpt / "資料2_ESの型.md").write_text(f"# 資料2：ESの型（ES対策室 {version}）\n" + "".join(f"\n\n---\n# 【{l}】\n\n{b}" for l, b in parts2))
+parts2 = [(kfile(n).stem, strip_front(kfile(n).read_text())) for n in (11, 8, 5, 2)]
+(gpt / "資料2_ESの型.md").write_text(f"# 資料2：ESの型と業界（ES対策室 {version}）\n" + "".join(f"\n\n---\n# 【{l}】\n\n{b}" for l, b in parts2))
+parts3 = [(kfile(n).stem, strip_front(kfile(n).read_text())) for n in (12, 3, 0)]
+(gpt / "資料3_文章の仕上げ.md").write_text(f"# 資料3：文章の仕上げ（ES対策室 {version}）\n" + "".join(f"\n\n---\n# 【{l}】\n\n{b}" for l, b in parts3))
 
 for p in sorted(list(out.iterdir()) + list(gpt.iterdir())):
     print(f"{p.name}\t{len(p.read_text())}字")
