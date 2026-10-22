@@ -1,6 +1,10 @@
 #!/bin/bash
 # 起動時に呼ばれる。前回の確認から3日以上たっていたら、GitHubの更新を確認して取り込む。
 cd "$(dirname "$0")/.." || exit 0
+# はじめての人（経験DBがまだ空で、/start もまだ）には、/start を勧める
+if ! ls 経験DB/_inbox/*_start.md >/dev/null 2>&1 && [ -z "$(ls 経験DB | grep -v -e '^_' -e '.gitkeep')" ]; then
+  echo "【ES対策室】はじめての人です。最初の返事で、あいさつと一緒に「まず /start と打ってください（10分で、あなたの話がESの1文になるところを体験できます）」と短く伝えてください。"
+fi
 stamp=.update_last_check
 now=$(date +%s)
 last=$(cat "$stamp" 2>/dev/null || echo 0)

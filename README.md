@@ -16,7 +16,7 @@
 | `.claude/skills/` | Claude用のSkill（深掘りチャットなど。順次追加） |
 | `.claude/agents/` | 有料版のエージェント（監修・リサーチ・執筆・審査役5体） |
 | `free/` | 無料版（Claude.aiのプロジェクト）にアップロードするファイル。`scripts/build-free.py` で作る |
-| `.claude/commands/` | 有料版のコマンド（/es・/es-review・/rally・/deep-dive） |
+| `.claude/commands/` | 有料版のコマンド（/start・/jibunshi・/es・/es-review・/rally・/deep-dive） |
 | `docs/` | セットアップ手順書・設計書・更新のしかた |
 
 ## 使い方
