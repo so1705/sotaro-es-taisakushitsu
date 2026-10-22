@@ -29,8 +29,8 @@ def check(text, kind):
         ("時の語で始まる文", f"{sum(1 for s in ss if re.search(TIME_WORDS, s))}文", sum(1 for s in ss if re.search(TIME_WORDS, s)) <= 1, "1文まで"),
         ("数字", f"{len(nums)}個（時刻・分・月日・学年{len(detail)}）", lo <= len(nums) <= hi and len(detail) <= 1, f"{lo}〜{hi}個、時刻・分・月日・学年は行動の細部として1つまで（15の1-7）"),
         ("1文の長さ", f"中央値{statistics.median(lens):.0f}字・最大{max(lens)}字", 40 <= statistics.median(lens) <= 55 and max(lens) <= 80, "中央値40〜55字、80字以下"),
-        ("理由づけの連鎖", f"{len(re.findall(r'と捉え|と考え|と判断し|そのため', text))}個", len(re.findall(r'と捉え|と考え|と判断し|そのため', text)) <= 2, "合わせて2つまで（15の1-7）"),
-        ("気持ちの文", f"{len(feel)}文（{feel}文目）", len(feel) <= 1, "1回まで、動機か原因の場面"),
+        ("理由づけの連鎖", f"{len(re.findall(r'と捉え|と考え|と判断し|そのため', text))}個", True, "上限なし（16を優先）"),
+        ("気持ちの文", f"{len(feel)}文（{feel}文目）", len(feel) == 0, "0（16の1-1）。動機の節（〜という想いから、〜した）は目で確かめる"),
     ]
     for name, val, ok, rule in rows:
         print(f"{'OK ' if ok else 'NG '} {name}：{val}　（基準：{rule}）")
