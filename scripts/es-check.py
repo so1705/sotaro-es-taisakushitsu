@@ -7,6 +7,22 @@ import re, sys, statistics
 TIME_WORDS = r"^(\d+月|当初|初めは|最初は|すると|その後|続けるうちに)"
 FEEL = r"思っ|感じ|迷|不思議|嬉し|悔し"
 
+def max_run(xs, same):
+    best = run = 1
+    for x, y in zip(xs, xs[1:]):
+        run = run + 1 if same(x, y) else 1
+        best = max(best, run)
+    return best
+
+
+def tail(s):
+    s = re.sub(r"[。」）]+$", "", s)
+    for e in ("ました", "ている", "です", "ます", "ない", "た", "だ", "る", "い"):
+        if s.endswith(e):
+            return e
+    return "体言"
+
+
 def check(text, kind):
     ss = [s.strip() for s in re.split(r"(?<=。)", text) if s.strip()]
     ends = ["敬体" if re.search(r"(ます|です|ました|ません|でした)[。」）]*$", s) else "常体" for s in ss]
@@ -30,6 +46,10 @@ def check(text, kind):
         ("数字", f"{len(nums)}個（時刻・分・月日・学年{len(detail)}）", lo <= len(nums) <= hi and len(detail) <= 1, f"{lo}〜{hi}個、時刻・分・月日・学年は行動の細部として1つまで（15の1-7）"),
         ("1文の長さ", f"中央値{statistics.median(lens):.0f}字・最大{max(lens)}字", 40 <= statistics.median(lens) <= 55 and max(lens) <= 80, "中央値40〜55字、80字以下"),
         ("理由づけの連鎖", f"{len(re.findall(r'と捉え|と考え|と判断し|そのため', text))}個", True, "上限なし（16を優先）"),
+        ("リズム（似た長さの連続）", f"最長{max_run([len(s) for s in ss], lambda x, y: abs(x - y) <= 0.2 * max(x, y))}文", max_run([len(s) for s in ss], lambda x, y: abs(x - y) <= 0.2 * max(x, y)) <= 3, "3文まで（17の5-2）"),
+        ("リズム（同じ文末の連続）", f"最長{max_run([tail(s) for s in ss], lambda x, y: x == y)}文", max_run([tail(s) for s in ss], lambda x, y: x == y) <= 3, "3文まで（17の5-2）"),
+        ("リズム（長い文）", f"70字以上 {sum(1 for s in ss if len(s) >= 70)}文", sum(1 for s in ss if len(s) >= 70) >= 1 or len(text) < 250, "250字以上なら1文以上（17の5-2）"),
+        ("「そこで」の数", f"{text.count('そこで')}回", text.count("そこで") <= 1, "1回まで（17の5-2）"),
         ("気持ちの文", f"{len(feel)}文（{feel}文目）", len(feel) == 0, "0（16の1-1）。動機の節（〜という想いから、〜した）は目で確かめる"),
     ]
     for name, val, ok, rule in rows:
